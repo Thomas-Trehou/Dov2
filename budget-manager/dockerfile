@@ -1,0 +1,20 @@
+# Image java
+FROM openjdk:11-jdk-slim
+
+# Répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copier les fichiers source dans le conteneur
+COPY src /app/src
+
+# Copier le script shell dans le conteneur
+COPY run.sh /app/run.sh
+
+# Rendre le script exécutable
+RUN chmod +x /app/run.sh
+
+# Compiler les fichiers Java
+RUN /app/run.sh
+
+# Définir le point d'entrée pour exécuter l'application
+CMD ["java", "-cp", "bin", "App"]
